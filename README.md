@@ -1,101 +1,57 @@
-# Project-DND
+# Meteor Dodge
 
-**A browser-based, turn-based, D&D-inspired roguelike** — one hundred floors of dice-driven
-danger, crowned by **Tiamat, the Dragon Queen**, and haunted by **secret Weapon super-bosses**
-(an affectionate homage to *Final Fantasy VII*).
+> ⚠️ **DEPRECATED — ARCHIVED.**
+> This repository is preserved as-is and is no longer maintained.
+> For the author's active, actual D&D project, see their other repository.
 
-This project began life as a tiny Lua console arcade game called *Meteor Dodge*, was rebuilt
-as a D&D-style dungeon crawler, and found its true form when it was **migrated to plain
-HTML + CSS + JavaScript**. It is an **AI-driven open-source project**: every system, balance
-table, and document in this repository was produced through iterative human–AI collaboration,
-with the Lua → web migration as the project's turning point.
+**Meteor Dodge** began as a tiny single-file Lua console arcade game — a lone ship
+dodging falling meteors across a 25×12 grid, 45 turns, 3 lives — and grew, through an
+AI-driven iterative development process, into a 100-floor turn-based browser roguelike
+with D&D-style dice combat, a skill tree, FF7-inspired secret Weapon super-bosses, and a
+live balance designer. It is archived here under its very first original name.
+
+## Name history
+
+| Era | Name |
+|---|---|
+| Phase 0 — Lua console arcade | **Meteor Dodge** ← original name, restored for archive |
+| Phase 1–2 — D&D turn & web migration | Dungeon Dice: Meteor Crypt |
+| Phase 3–11 — web RPG expansion | DND (Dungeon and dragons) |
+| Archive | **Meteor Dodge** |
+
+## What's inside
+
+- `src/` — final web build (`index.html`, `styles.css`, `script.js`), v11
+- `TIMELINE.md` — full project progression, Phase 0 → Phase 11
+- `LORE.md` — in-universe canon of the Meteor Crypt
+
+## Feature snapshot (final build)
+
+- Turn-based grid roguelike, 100 floors; death returns you to Floor 1 keeping all progress
+- 3 classes (Fighter / Rogue / Wizard with MP), d20 combat, crits, advantage, rogue crit spec
+- Stat-point allocation with % damage scaling; skill tree with active slots & cooldowns
+- Merchant with random stock (scrolls, swift shoes, holy wing), class-specific weapons,
+  blacksmith enhancement +1…+20 (raw + % damage), storage inventory + item utility slots
+- Secret FF7-style Weapon super-bosses (Sapphire → Diamond → Ultima → Ruby → Emerald)
+  dropping relics; Tiamat, Dragon Queen as the floor-100 boss
+- Multi-slot localStorage saves; only the explicit "Erase data" button can wipe them
+- Live ⚙ Balance Designer panel — runtime tuning that never touches save data
+- Auto-play demo AI, 1x/3x/5x speed, hold-to-walk, click-to-attack, slash & ember VFX
+
+## Run it (for posterity)
+
+Open `src/index.html` in any browser, or serve the folder locally.
+Originally developed on OneCompiler as an HTML project (3 tabs).
+
+## AI-driven development note
+
+This project was built through conversational human–AI pairing: the human director set
+the vision, the corrections, and the balance intent; the AI produced the code, the docs,
+and the lore. The pivotal chapter was the **Lua → HTML/CSS/JS migration**, which kept all
+game logic identical while replacing only the I/O layer — the step that made everything
+after it possible.
+
 
 ---
 
-## What is this?
-
-You are a delver of the **Meteor Crypt**, a hundred-floor dungeon born from a fallen star.
-Descend, level up, allocate stat points, buy and hone weapons, and roll the d20 against
-escalating horrors — goblins to death knights, drakes to demons.
-
-- **3 classes** — Fighter / Rogue / Wizard, each with a signature ability.
-- **True tabletop-style combat** — d20 attack rolls, AC, crits, fumbles, advantage, proficiency.
-- **Character sheet** — every level grants stat points to spend on STR / DEX / CON / INT.
-- **Economy** — a traveling merchant on every floor; 8 weapon tiers up to the *Masamune*;
-  training upgrades (Max HP, AC, ability uses) and weapon honing.
-- **Secret super-bosses** — the five Weapons (Sapphire → Diamond → Ultima → Ruby → Emerald)
-  appear only through rare or conditional portals; each drops a unique **relic**.
-- **Persistence** — auto-saves every turn; resume with *Continue*; only **Erase data** wipes.
-- **Combat juice** — floating damage numbers, crit bursts, projectiles, screen shake,
-  color-coded log.
-- **Auto-Play demo** — a built-in AI (inherited from the Lua "no input" mode) that plays
-  the whole game hands-free.
-
-## How to play
-
-| Key | Action |
-|---|---|
-| `WASD` / `HJKL` / Arrows | Move (bump an enemy to attack) |
-| `F` | Class ability |
-| `Q` | Drink potion |
-| `X` | Defend (+2 AC until next turn) |
-| `.` / `Space` | Wait |
-| `B` | Shop (while standing on `M`) |
-| `C` | Character sheet (spend stat points) |
-| `1–9` | Buy / allocate in menus |
-| `Esc` | Close menus |
-
-**Goal:** reach floor 100 and slay Tiamat.
-**Secret goal:** find the `?` portals… if they find you first.
-
-## Run it
-
-**OneCompiler:** create an HTML project, paste the three files from `src/` into the
-`index.html`, `styles.css`, and `script.js` tabs, press **Run**.
-
-**Locally:**
-
-```bash
-git clone <your-repo-url>
-cd <your-repo>
-# either open src/index.html directly, or serve it:
-cd src && python -m http.server 8000   # → http://localhost:8000
-```
-
-## Repository layout
-
-```text
-/
-├── README.md        # you are here
-├── TIMELINE.md      # project progression (the Lua → web migration & beyond)
-├── LORE.md          # the canon of the Meteor Crypt
-└── src/
-    ├── index.html   # structure, HUD, overlays
-    ├── styles.css   # theme, board, combat FX
-    └── script.js    # the entire game engine
-```
-
-## AI-driven development
-
-This repository is an experiment in **AI-paired game development**. The project started as a
-single-file Lua arcade sketch and grew, through conversational iteration, into a full
-turn-based RPG. The human director set the vision, the constraints, and the corrections —
-including the crucial one that restored the Weapons to their proper role as *secret* bosses
-and renamed the project; the AI produced the code, the balance math, and the prose.
-
-The pivotal chapter was the **migration from Lua to HTML/CSS/JS**: OneCompiler's Lua
-environment offered only console output and no real input, so the entire engine was ported
-with a strict rule — *logic first, I/O last*: every rule and table carried over 1:1, while
-`print()` grids became a DOM board and STDIN lines became keyboard events. That migration
-unlocked everything that followed. See `TIMELINE.md`.
-
-## Contributing
-
-Ideas welcome. Seeds already on the table:
-
-- relic set bonuses
-- elite affixes for deep floors (vampiric, reflecting…)
-- rest shrines & camp events
-- multiple save slots
-- even rarer secret conditions ("full moon", "666 XP", "never harmed a merchant")
-
+*Archived. The ember storm over the Meteor Crypt has settled — for now.*
